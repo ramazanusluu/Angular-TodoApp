@@ -2,15 +2,15 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app',
-  // templateUrl: './app.component.html',
-  template: `
-    <h1>Angular App Component</h1>
-    <h2>React vs Angular</h2>
-    <h3>{{ title }}</h3>
-    <h3>{{ getTitle() }}</h3>
-    <div>{{ todoItem.description }} - {{ todoItem.action }}</div>
-  `,
-  styleUrls: ['./app.component.css'],
+  templateUrl: './app.component.html',
+  // styleUrls: ['./app.component.css'],
+  styles: [
+    `
+      h1 {
+        color: blue;
+      }
+    `,
+  ],
 })
 export class AppComponent {
   title = 'todo app';
