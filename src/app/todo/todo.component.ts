@@ -8,11 +8,15 @@ import { Model } from '../model';
   styleUrls: ['./todo.component.css'],
 })
 export class TodoComponent {
+  displayAll: boolean = false;
+
+  message: string = '';
+  
   constructor() {}
 
   // // private name: string = 'Ramazan';
-  // items = ['item 1', 'item 2', 'item 3', 'item 4'];
-  // items: TodoItem[] = [
+  // // items = ['item 1', 'item 2', 'item 3', 'item 4'];
+  // // items: TodoItem[] = [
   //   // {
   //   //   description: 'Kahvaltı',
   //   //   action: 'yes',
@@ -29,19 +33,19 @@ export class TodoComponent {
   //   // new TodoItem('Spor', 'yes'),
   //   // new TodoItem('Alışveriş', 'no'),
   //   // new TodoItem('Alışveriş', 'no'),
-  //   {
-  //     description: 'Kahvaltı',
-  //     action: 'yes',
-  //   },
-  //   {
-  //     description: 'Spor',
-  //     action: 'yes',
-  //   },
-  //   {
-  //     description: 'Alışveriş',
-  //     action: 'no',
-  //   },
-  // ];
+  // //   {
+  // //     description: 'Kahvaltı',
+  // //     action: 'yes',
+  // //   },
+  // //   {
+  // //     description: 'Spor',
+  // //     action: 'yes',
+  // //   },
+  // //   {
+  // //     description: 'Alışveriş',
+  // //     action: 'no',
+  // //   },
+  // // ];
 
   model = new Model();
 
@@ -49,23 +53,26 @@ export class TodoComponent {
     return this.model.name;
   }
   getItems() {
-    return this.model.items;
+    if (this.displayAll) {
+      return this.model.items;
+    }
+    return this.model.items.filter((item) => !item.action);
   }
 
-  message: string = '';
+  // // message: string = '';
 
-  // addItem(txtItem: any) {
-  //   console.log(txtItem.value);
-  // }
+  // // addItem(txtItem: any) {
+  // //   console.log(txtItem.value);
+  // // }
 
-  // addItem(value: string) {
-  //   console.log(value);
-  //   this.message = value;
-  // }
+  // // addItem(value: string) {
+  // //   console.log(value);
+  // //   this.message = value;
+  // // }
 
   addItem(value: string) {
     if (value != '') {
-      this.model.items.push({ description: value, action: 'no' });
+      this.model.items.push({ description: value, action: false });
     } else {
       alert('Bilgi giriniz !');
     }

@@ -4,6 +4,7 @@
       <h3 class="bg-primary text-white p-3">{{ getName() }}'s ToDo List</h3>
       <div class="input-group mb-3">
         <input
+        [(ngModel)]="message"
           #txtItem
           type="text"
           class="form-control"
@@ -16,16 +17,18 @@
           Add
         </button>
       </div>
-      {{ message }}
+      {{message}}
       <div class="form-check mb-3">
         <input
           type="checkbox"
           name="check"
           id="check"
           class="form-check-input"
+          [(ngModel)]="displayAll"
         />
         <label class="form-check-label" for="check">Hepsini göster</label>
       </div>
+      {{ displayAll }}
       <table class="table table-bordered">
         <thead>
           <tr>
@@ -36,9 +39,12 @@
         </thead>
         <tbody>
           <tr *ngFor="let item of getItems(); let i = index">
-            <td>{{ i }}</td>
+            <td>{{ i+1 }}</td>
             <td>{{ item.description }}</td>
             <td>{{ item.action }}</td>
+            <td>
+              <input type="checkbox" [(ngModel)]="item.action" name="" id="">
+            </td>
           </tr>
         </tbody>
       </table>
