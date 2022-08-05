@@ -11,7 +11,7 @@ export class TodoComponent {
   displayAll: boolean = false;
 
   message: string = '';
-  
+
   constructor() {}
 
   // // private name: string = 'Ramazan';
@@ -76,5 +76,8 @@ export class TodoComponent {
     } else {
       alert('Bilgi giriniz !');
     }
+  }
+  displayCount() {
+    return this.model.items.filter((i) => i.action).length;
   }
 }
