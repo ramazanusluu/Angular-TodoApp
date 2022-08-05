@@ -10,6 +10,9 @@ import { Model } from '../model';
 export class TodoComponent {
   displayAll: boolean = false;
 
+  // inputtan girilen değeri karşılayacak text
+  inputText: string = '';
+
   message: string = '';
 
   constructor() {}
@@ -70,14 +73,23 @@ export class TodoComponent {
   // //   this.message = value;
   // // }
 
-  addItem(value: string) {
-    if (value != '') {
-      this.model.items.push({ description: value, action: false });
+  addItem() {
+    if (this.inputText != '') {
+      this.model.items.push({ description: this.inputText, action: false });
+      this.inputText = '';
     } else {
       alert('Bilgi giriniz !');
     }
   }
   displayCount() {
     return this.model.items.filter((i) => i.action).length;
+  }
+
+  getBtnClasses() {
+    return {
+      disabled: this.inputText.length == 0,
+      'btn-secondary': this.inputText.length == 0,
+      'btn-primary': this.inputText.length == 1,
+    };
   }
 }

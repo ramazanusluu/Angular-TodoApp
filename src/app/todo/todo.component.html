@@ -4,20 +4,20 @@
       <h3 class="bg-primary text-white p-3">{{ getName() }}'s ToDo List</h3>
       <div class="input-group mb-3">
         <input
-          [(ngModel)]="message"
-          #txtItem
+          [(ngModel)]="inputText"
           type="text"
           class="form-control"
-          (keyup.enter)="addItem(txtItem.value); txtItem.value = ''"
+          (keyup.enter)="addItem()"
         />
         <button
-          class="btn btn-outline-primary"
-          (click)="addItem(txtItem.value); txtItem.value = ''"
+          class="btn"
+          (click)="addItem()"
+          [class]="getBtnClasses()"
         >
           Add
         </button>
       </div>
-      {{ message }}
+
       <div class="form-check mb-3">
         <input
           type="checkbox"
@@ -45,7 +45,13 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let item of getItems(); let i = index">
+            <tr
+              *ngFor="let item of getItems(); let i = index"
+              [class]="{
+                'bg-primary': item.action,
+                'bg-warning': !item.action
+              }"
+            >
               <td>{{ i }}</td>
               <td>{{ item.description }}</td>
               <td>
