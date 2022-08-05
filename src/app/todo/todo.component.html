@@ -1,10 +1,19 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-5 mx-auto">
-      <h3 class="bg-primary text-white p-3">Ramazan'ın Listesi</h3>
+      <h3 class="bg-primary text-white p-3">{{ getName() }}'s ToDo List</h3>
       <div class="input-group mb-3">
         <input type="text" name="input" id="input" class="form-control" />
         <button class="btn btn-outline-primary">Add</button>
+      </div>
+      <div class="form-check mb-3">
+        <input
+          type="checkbox"
+          name="check"
+          id="check"
+          class="form-check-input"
+        />
+        <label class="form-check-label" for="check">Hepsini göster</label>
       </div>
       <table class="table table-bordered">
         <thead>
@@ -15,32 +24,23 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Kahvaltı</td>
-            <td>Yes</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Spor</td>
-            <td>Yes</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>Alışveriş</td>
-            <td>No</td>
+          <tr *ngFor="let item of items; let i = index;">
+            <td>{{i}}</td>
+            <td>{{ item.description }}</td>
+            <td>{{ item.action }}</td>
           </tr>
         </tbody>
       </table>
-      <div class="form-check mb-3">
-        <input
-          type="checkbox"
-          name="check"
-          id="check"
-          class="form-check-input"
-        />
-        <label class="form-check-label" for="check">Hepsini göster</label>
-      </div>
+      <!-- <ul>
+        <li *ngFor="let item of items">
+          {{ item }}
+        </li>
+      </ul> -->
+      <!-- <div>
+        <p *ngFor="let item of items">
+          {{ item.description }}
+        </p>
+      </div> -->
     </div>
   </div>
 </div>
