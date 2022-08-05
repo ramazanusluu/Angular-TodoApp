@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Model } from '../model';
+import { TodoItem } from '../todo.item';
 // import { TodoItem } from '../todo.item';
 
 @Component({
@@ -15,7 +16,10 @@ export class TodoComponent {
 
   message: string = '';
 
-  constructor() {}
+  // Component ilk yüklendiği anda;
+  constructor() {
+    this.model.items = this.getItemsFromLS();
+  }
 
   // // private name: string = 'Ramazan';
   // // items = ['item 1', 'item 2', 'item 3', 'item 4'];
@@ -75,12 +79,39 @@ export class TodoComponent {
 
   addItem() {
     if (this.inputText != '') {
-      this.model.items.push({ description: this.inputText, action: false });
+      let data = { description: this.inputText, action: false };
+      this.model.items.push(data);
+      let items = this.getItemsFromLS();
+      items.push(data);
+      localStorage.setItem('items', JSON.stringify(items));
       this.inputText = '';
     } else {
       alert('Bilgi giriniz !');
     }
   }
+
+  getItemsFromLS() {
+    let items: TodoItem[] = [];
+    let value = localStorage.getItem('items');
+    if (value != null) {
+      items = JSON.parse(value);
+    }
+    return items;
+  }
+
+  onActionChanged(item: TodoItem) {
+    let items = this.getItemsFromLS();
+
+    localStorage.clear();
+
+    items.forEach((i) => {
+      if (i.description == item.description) {
+        i.action = item.action;
+      }
+    });
+    localStorage.setItem('items', JSON.stringify(items));
+  }
+
   displayCount() {
     return this.model.items.filter((i) => i.action).length;
   }

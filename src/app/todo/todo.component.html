@@ -9,11 +9,7 @@
           class="form-control"
           (keyup.enter)="addItem()"
         />
-        <button
-          class="btn"
-          (click)="addItem()"
-          [class]="getBtnClasses()"
-        >
+        <button class="btn" (click)="addItem()" [class]="getBtnClasses()">
           Add
         </button>
       </div>
@@ -88,6 +84,7 @@
                   [(ngModel)]="item.action"
                   name=""
                   id=""
+                  (change)="onActionChanged(item)"
                 />
               </td>
             </tr>
