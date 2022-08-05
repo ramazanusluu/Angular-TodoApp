@@ -3,9 +3,20 @@
     <div class="col-sm-5 mx-auto">
       <h3 class="bg-primary text-white p-3">{{ getName() }}'s ToDo List</h3>
       <div class="input-group mb-3">
-        <input type="text" name="input" id="input" class="form-control" />
-        <button class="btn btn-outline-primary">Add</button>
+        <input
+          #txtItem
+          type="text"
+          class="form-control"
+          (keyup.enter)="addItem(txtItem.value); txtItem.value = ''"
+        />
+        <button
+          class="btn btn-outline-primary"
+          (click)="addItem(txtItem.value); txtItem.value = ''"
+        >
+          Add
+        </button>
       </div>
+      {{ message }}
       <div class="form-check mb-3">
         <input
           type="checkbox"

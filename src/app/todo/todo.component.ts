@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Model } from '../model';
-import { TodoItem } from '../todo.item';
+// import { TodoItem } from '../todo.item';
 
 @Component({
   selector: 'app-todo',
@@ -48,7 +48,26 @@ export class TodoComponent {
   getName() {
     return this.model.name;
   }
-  getItems(){
+  getItems() {
     return this.model.items;
+  }
+
+  message: string = '';
+
+  // addItem(txtItem: any) {
+  //   console.log(txtItem.value);
+  // }
+
+  // addItem(value: string) {
+  //   console.log(value);
+  //   this.message = value;
+  // }
+
+  addItem(value: string) {
+    if (value != '') {
+      this.model.items.push({ description: value, action: 'no' });
+    } else {
+      alert('Bilgi giriniz !');
+    }
   }
 }
